@@ -494,6 +494,24 @@ class SoCos(object):
 
     @staticmethod
     @add_command()
+    def night_mode(sonos, *args):
+        """Change or show the night mode setting of a device
+           Accepted values: true, false
+        """
+        def night_mode_str():
+            return "Night mode: {}".format(sonos.night_mode)
+
+        if sonos.night_mode is None:
+            return "Speaker has no night mode"
+
+        if not args:
+            return night_mode_str()
+
+        sonos.night_mode = args[0].lower() == 'true'
+        return night_mode_str()
+
+    @staticmethod
+    @add_command()
     def player_name(sonos, *args):
         """Set or get the player name of a device"""
         if not args:
